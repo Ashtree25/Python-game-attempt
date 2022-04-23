@@ -80,10 +80,11 @@ class Snake:
 
 
 class Game:
+    #change length of snake to 1 so score can be 1
     def __init__(self):
         pygame.init()
         self.surface = pygame.display.set_mode((X_SIZE, Y_SIZE))
-        self.snake = Snake(self.surface, 5)
+        self.snake = Snake(self.surface, 1)
         self.snake.draw()
         self.apple = Apple(self.surface)
         self.apple.draw()
@@ -129,12 +130,13 @@ class Game:
             logging.debug("Resetting OUTSIDE for Y")
             OUTSIDE = 0
         return OUTSIDE
-
+#scoreboard        
     def display_Score(self):
         font = pygame.font.SysFont('arial', 30)
         score = font.render(
             f"Score: {self.snake.length}", True, (200, 200, 200))
         self.surface.blit(score, (850, 10))
+        
 
     def play(self):
         self.snake.walk()
@@ -152,6 +154,7 @@ class Game:
             logging.debug("AFTER apple move, apple[%s, %s]", self.apple.x, self.apple.y)
         else:
             logging.debug("No collision, snake[%s, %s], apple[%s, %s]", self.snake.x[0], self.snake.y[0], self.apple.x, self.apple.y)
+
 
     def run(self):
         running = True
@@ -187,7 +190,6 @@ class Game:
 if __name__ == "__main__":
     # Change the logging level below from DEBUG to INFO when you are finished
     # Please remove game.log each time you run, or you will fill up your disc!
-    # Ashlyn has been working hard
     logging.basicConfig(filename='game.log', encoding='utf-8', level=logging.DEBUG)
     logging.debug('This message should go to the log file')
     SIZE = 40
