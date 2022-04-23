@@ -10,8 +10,8 @@ class Apple:
     def __init__(self, parent_screen):
         self.parent_screen = parent_screen
         self.block = pygame.image.load("resources/apple.jpg").convert()
-        self.x = random.randint(20, X_SIZE-20)
-        self.y = random.randint(20, Y_SIZE-20)
+        self.x = random.randint(30, X_SIZE-30)
+        self.y = random.randint(30, Y_SIZE-30)
 
     def draw(self):
         self.parent_screen.blit(self.block, (self.x, self.y))
@@ -77,8 +77,6 @@ class Snake:
         self.x.append(-1)
         self.y.append(-1)
 
-# the windown thing
-
 
 class Game:
     # change length of snake to 1 so score can be 1
@@ -113,7 +111,8 @@ class Game:
             logging.debug("moving up")
             self.snake.move_up()
             return
-
+            
+    # check boundary so snake dont go out
     def check_boundary(self, x1, y1, OUTSIDE):
         if (x1 <= 0 or x1 > X_SIZE) and OUTSIDE == 0:
             logging.debug("Inverting X direction [%s]", x1)
@@ -199,6 +198,6 @@ if __name__ == "__main__":
     logging.debug('This message should go to the log file')
     SIZE = 40
     X_SIZE = 1000
-    Y_SIZE = 800
+    Y_SIZE = 1000
     game = Game()
     game.run()
