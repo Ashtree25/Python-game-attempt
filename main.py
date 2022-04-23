@@ -63,9 +63,9 @@ class Snake:
 
         self.draw()
 
-    # background color: pink
+    # background color
     def draw(self):
-        self.parent_screen.fill((23, 156, 34))
+        self.parent_screen.fill((59, 6, 6))
 
         for i in range(self.length):
             self.parent_screen.blit(self.block, (self.x[i], self.y[i]))
