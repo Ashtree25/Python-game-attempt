@@ -111,7 +111,7 @@ class Game:
             logging.debug("moving up")
             self.snake.move_up()
             return
-            
+
     # check boundary so snake dont go out
     def check_boundary(self, x1, y1, OUTSIDE):
         if (x1 <= 0 or x1 > X_SIZE) and OUTSIDE == 0:
@@ -198,6 +198,6 @@ if __name__ == "__main__":
     logging.debug('This message should go to the log file')
     SIZE = 40
     X_SIZE = 1000
-    Y_SIZE = 1000
+    Y_SIZE = 800
     game = Game()
     game.run()
