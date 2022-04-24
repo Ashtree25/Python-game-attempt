@@ -21,8 +21,21 @@ class Apple:
         self.x = random.randint(1, 25)*SIZE
         self.y = random.randint(1, 20)*SIZE
         self.draw()
+ 
+class Question:
+    def __init__(self, parent_screen):
+        self.parent_screen = parent_screen
+        self.image = pygame.image.load("resources/question.jpg").convert()
+        self.x = 120
+        self.y = 120
+        self.DRAW_OR_NOT = False
 
-
+   
+    def draw(self):
+        if self.DRAW_OR_NOT:
+            self.parent_screen.blit(self.image, (self.x, self.y))
+            pygame.display.flip()
+ 
 class Snake:
     # assigning key function for going up, down, left, right
     def __init__(self, parent_screen, length):
@@ -76,8 +89,7 @@ class Snake:
         self.length += 1
         self.x.append(-1)
         self.y.append(-1)
-
-
+ 
 class Game:
     # change length of snake to 1 so score can be 1
     def __init__(self):
@@ -87,7 +99,8 @@ class Game:
         self.snake.draw()
         self.apple = Apple(self.surface)
         self.apple.draw()
-
+        self.question = Question(self.surface)
+ 
     def is_collision(self, x1, y1, x2, y2):
         if x1 >= x2 and x1 < x2 + SIZE:
             if y1 >= y2 and y1 < y2 + SIZE:
@@ -111,8 +124,8 @@ class Game:
             logging.debug("moving up")
             self.snake.move_up()
             return
-
-    # check boundary so snake dont go out
+    
+     # check boundary so snake dont go out
     def check_boundary(self, x1, y1, OUTSIDE):
         if (x1 <= 0 or x1 > X_SIZE) and OUTSIDE == 0:
             logging.debug("Inverting X direction [%s]", x1)
@@ -142,6 +155,8 @@ class Game:
         self.apple.draw()
         self.display_Score()
         pygame.display.flip()
+        self.question.draw()
+
 
         if self.is_collision(self.snake.x[0], self.snake.y[0], self.apple.x, self.apple.y):
             logging.debug("COLLISION, snake[%s, %s], apple[%s, %s], snake before length[%s]",
@@ -154,6 +169,7 @@ class Game:
             self.apple.move()
             logging.debug(
                 "AFTER apple move, apple[%s, %s]", self.apple.x, self.apple.y)
+            self.question.DRAW_OR_NOT = True
         else:
             logging.debug("No collision, snake[%s, %s], apple[%s, %s]",
                           self.snake.x[0], self.snake.y[0], self.apple.x, self.apple.y)
