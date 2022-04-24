@@ -210,11 +210,11 @@ if __name__ == "__main__":
     # Change the logging level below from DEBUG to INFO when you are finished
     # Please remove game.log each time you run, or you will fill up your disc!
     logging.basicConfig(filename='game.log',
-                        encoding='utf-8', level=logging.DEBUG)
+                        encoding='utf-8', level=logging.INFO)
     logging.debug('This message should go to the log file')
     SIZE = 40
     X_SIZE = 1000
     Y_SIZE = 800
     game = Game()
     game.run()
-#me trying to ake stuff uplaod
+#upload?
